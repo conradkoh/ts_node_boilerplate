@@ -6,18 +6,12 @@ class User extends Model {}
 export function makeUserModel(sequelize) {
     User.init(
         {
-            first_name: DataTypes.STRING,
+            firstName: DataTypes.STRING,
+            lastName: DataTypes.STRING,
             username: DataTypes.STRING,
-            // birthday: DataTypes.DATE,
         },
-        { sequelize, modelName: 'user' }
+        { sequelize, modelName: 'user', indexes: [{ fields: ['username'] }] }
     );
-
-    (async () => {
-        await sequelize.sync();
-        // const users = await User.findAll({ where: {} });
-        // console.log(users);
-    })();
 
     let model = {
         findAll: User.findAll,

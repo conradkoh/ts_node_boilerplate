@@ -3,22 +3,32 @@ import packageInfo from '../../package.json';
 dotenv.config();
 
 export function getConfig() {
+    const NODE_PORT = process.env.PORT || 8081;
+    const NODE_ENV = process.env.NODE_ENV;
+    const APIINFO_NAME = packageInfo.name;
+    const APIINFO_VERSION = packageInfo.version;
+    const DB_DATABASE = process.env.DB_DATABASE;
+    const DB_USERNAME = process.env.DB_USERNAME;
+    const DB_PASSWORD = process.env.DB_PASSWORD;
+    const DB_HOST = process.env.DB_HOST;
+    /** @type {*} */
+    const DB_DIALECT = process.env.DB_DIALECT;
+    const DB_PORT = parseInt(process.env.DB_PORT);
     return Object.freeze({
-        PORT: process.env.PORT || 8081,
-        ENV: process.env.NODE_ENV,
+        NODE_PORT,
+        NODE_ENV,
         //The info for this API
         apiInfo: {
-            name: packageInfo.name,
-            version: packageInfo.version,
+            name: APIINFO_NAME,
+            version: APIINFO_VERSION,
         },
         db: {
-            database: process.env.DB_DATABASE,
-            username: process.env.DB_USERNAME,
-            password: process.env.DB_PASSWORD,
-            host: process.env.DB_HOST,
-            /** @type {*} */
-            dialect: process.env.DB_DIALECT,
-            port: parseInt(process.env.DB_PORT),
+            database: DB_DATABASE,
+            username: DB_USERNAME,
+            password: DB_PASSWORD,
+            host: DB_HOST,
+            dialect: DB_DIALECT,
+            port: DB_PORT,
         },
     });
 }

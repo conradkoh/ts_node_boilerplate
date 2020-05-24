@@ -1,13 +1,12 @@
-const { Sequelize } = require('sequelize');
 import { makeUserModel } from './user';
 import { getConfig } from '../config/index';
-const { database, username, password, host, port, dialect } = getConfig().db;
+import { getSequelize } from '../config/sequelize';
 
-const sequelize = new Sequelize(database, username, password, {
-    host,
-    port,
-    dialect,
-});
+const config = getConfig(); //Global configuration
+const sequelize = getSequelize(config.NODE_ENV, config.db); //Initialize Sequelize
+
+//Update all models to follow app definition
+sequelize.sync();
 
 const user = makeUserModel(sequelize);
 export default {
