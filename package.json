@@ -9,6 +9,7 @@
         "test:watchFile": "testFile(){ mocha $1 --reporter min -w --require esm; return 0; }; testFile",
         "dev": "nodemon -- --inspect src/index.js",
         "generate:docs": "apidoc -i src/ -o doc/",
+        "db:createMigration": "echo \"Migration name: \"; read name; npx sequelize migration:generate --name \"$name\";",
         "db:migrate": "npx sequelize db:migrate",
         "db:migrate:undo": "npx sequelize db:migrate:undo"
     },

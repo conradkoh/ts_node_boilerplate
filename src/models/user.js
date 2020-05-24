@@ -9,6 +9,8 @@ export function makeUserModel(sequelize) {
             firstName: DataTypes.STRING,
             lastName: DataTypes.STRING,
             username: DataTypes.STRING,
+            email: DataTypes.STRING,
+            deleted: DataTypes.BOOLEAN,
         },
         { sequelize, modelName: 'user', indexes: [{ fields: ['username'] }] }
     );
