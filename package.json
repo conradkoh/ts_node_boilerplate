@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "mocha test --recursive --require esm",
+        "test:watch": "mocha test --reporter min -w --recursive --require esm",
         "dev": "nodemon -- --inspect src/index.js",
         "generate:docs": "apidoc -i src/ -o doc/"
     },
@@ -13,9 +14,11 @@
     "license": "ISC",
     "dependencies": {
         "apidoc": "^0.22.1",
+        "chai": "^4.2.0",
         "dotenv": "^8.2.0",
         "esm": "^3.2.25",
         "express": "^4.17.1",
+        "mocha": "^7.2.0",
         "nodemon": "^2.0.4"
     },
     "devDependencies": {
