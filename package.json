@@ -5,12 +5,14 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "nodemon -- --inspect src/index.js"
+        "dev": "nodemon -- --inspect src/index.js",
+        "generate:docs": "apidoc -i src/ -o doc/"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "apidoc": "^0.22.1",
         "dotenv": "^8.2.0",
         "esm": "^3.2.25",
         "express": "^4.17.1",
