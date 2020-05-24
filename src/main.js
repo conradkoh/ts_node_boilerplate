@@ -7,7 +7,7 @@ const app = express();
 app.use('/', api);
 
 //Start listening to requests
-app.listen(config.PORT, () => {
-    const env = config.ENV;
-    console.log(`Service Started: [${env}] on port ${config.PORT}`);
+app.listen(config.NODE_PORT, () => {
+    const env = config.NODE_ENV;
+    console.log(`Service Started: [${env}] on port ${config.NODE_PORT}`);
 });

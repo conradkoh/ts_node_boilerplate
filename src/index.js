@@ -1,3 +1,4 @@
-// Set options as a parameter, environment variable, or rc file.
-require = require('esm')(module /*, options*/);
+/** @type {*} */
+const m = module;
+require = require('esm')(m /*, options*/);
 module.exports = require('./main.js');
