@@ -1,5 +1,6 @@
 import express from 'express';
 import { getConfig } from '../config/index';
+import controllers from '../controllers';
 import docsRouter from './docs';
 const config = getConfig();
 const router = express.Router();
