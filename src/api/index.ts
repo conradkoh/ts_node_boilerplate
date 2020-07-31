@@ -27,7 +27,7 @@ const router = express.Router();
  * }
  */
 router.get('/', (req, res) => {
-    res.json(config.apiInfo);
+  res.json(config.apiInfo);
 });
 
 router.use('/docs', docsRouter);

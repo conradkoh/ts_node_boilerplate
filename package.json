@@ -1,36 +1,40 @@
 {
-    "name": "duskfare_api_bootstrap",
-    "version": "1.0.0",
-    "description": "",
-    "main": "index.js",
-    "scripts": {
-        "test": "mocha test --recursive --require esm",
-        "test:watch": "mocha test --reporter min -w --recursive --require esm",
-        "test:watchFile": "testFile(){ mocha $1 --reporter min -w --require esm; return 0; }; testFile",
-        "dev": "nodemon -- --inspect src/index.js",
-        "generate:docs": "apidoc -i src/ -o doc/",
-        "db:createMigration": "echo \"Migration name: \"; read name; npx sequelize migration:generate --name \"$name\";",
-        "db:migrate": "npx sequelize db:migrate",
-        "db:migrate:undo": "npx sequelize db:migrate:undo"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "apidoc": "^0.22.1",
-        "chai": "^4.2.0",
-        "dotenv": "^8.2.0",
-        "esm": "^3.2.25",
-        "express": "^4.17.1",
-        "mocha": "^7.2.0",
-        "mysql2": "^2.1.0",
-        "nodemon": "^2.0.4",
-        "sequelize": "^5.21.10",
-        "sequelize-cli": "^5.5.1"
-    },
-    "devDependencies": {
-        "@types/express": "^4.17.6",
-        "@types/node": "^14.0.5",
-        "@types/sequelize": "^4.28.9"
-    }
+  "name": "duskfare_api_bootstrap",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha tests/**/*.ts",
+    "test:watch": "mocha tests/**/*.ts --watch --reporter min",
+    "test:watchFile": "testFile(){ mocha $1 --watch --reporter min; return 0; }; testFile",
+    "dev": "nodemon -- --inspect src/index.ts",
+    "generate:docs": "apidoc -i src/ -o doc/",
+    "db:createMigration": "echo \"Migration name: \"; read name; npx sequelize migration:generate --name \"$name\";",
+    "db:migrate": "npx sequelize db:migrate",
+    "db:migrate:undo": "npx sequelize db:migrate:undo"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/chai": "^4.2.12",
+    "@types/mocha": "^8.0.0",
+    "apidoc": "^0.22.1",
+    "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "mocha": "^7.2.0",
+    "mysql2": "^2.1.0",
+    "nodemon": "^2.0.4",
+    "sequelize": "^5.21.10",
+    "sequelize-cli": "^5.5.1",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "@types/node": "^14.0.5",
+    "@types/sequelize": "^4.28.9"
+  }
 }
