@@ -8,6 +8,8 @@
     "test:watch": "mocha tests/**/*.ts --watch --reporter min",
     "test:watchFile": "testFile(){ mocha $1 --watch --reporter min; return 0; }; testFile",
     "dev": "nodemon -- --inspect src/index.ts",
+    "start": "npm run build && node dist/src/index.js",
+    "build": "tsc",
     "generate:docs": "apidoc -i src/ -o doc/",
     "db:createMigration": "echo \"Migration name: \"; read name; npx sequelize migration:generate --name \"$name\";",
     "db:migrate": "npx sequelize db:migrate",

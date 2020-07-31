@@ -10,5 +10,5 @@ sequelize.sync();
 
 const user = makeUserModel(sequelize);
 export default {
-    user,
+  user,
 };

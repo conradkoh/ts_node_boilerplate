@@ -1,5 +1,5 @@
-export const NODE_ENV = {
-    TEST: 'test',
-    DEVELOPMENT: 'development',
-    PRODUCTION: 'production',
-};
+export enum NodeEnv {
+  TEST = 'test',
+  DEVELOPMENT = 'development',
+  PRODUCTION = 'production',
+}
