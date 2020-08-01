@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
-import packageInfo from '../../package.json';
+// import packageInfo from '../../package.json';
+import path from 'path';
 import { NodeEnv } from './constants';
+import { readFileSync, fchmod } from 'fs';
 dotenv.config();
 
 interface Config {
@@ -13,6 +15,7 @@ interface Config {
 export function getConfig(): Config {
   const NODE_PORT = process.env.PORT || 8081;
   const { NODE_ENV, DB_DATABASE, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_PORT, DB_DIALECT } = parseEnv(process.env);
+  let packageInfo = tryGetPackageInfo();
   const APIINFO_NAME = packageInfo.name;
   const APIINFO_VERSION = packageInfo.version;
   return Object.freeze({
@@ -33,18 +36,24 @@ export function getConfig(): Config {
     },
   });
 }
-interface EnvConfig {
-  NODE_ENV: NodeEnv;
-  DB_DATABASE: string;
-  DB_USERNAME: string;
-  DB_PASSWORD: string;
-  DB_HOST: string;
-  DB_PORT: number;
-  DB_DIALECT: DbDialect;
+function tryGetPackageInfo(): PackageInfo {
+  let packageManifestPath = path.resolve(path.join(__dirname, '../../package.json'));
+  let packageInfo = {
+    name: '',
+    version: 'unknown',
+  };
+  try {
+    let fc = readFileSync(packageManifestPath).toString();
+    let data = JSON.parse(fc);
+    packageInfo.name = `${data.name}`;
+    packageInfo.version = `${data.version}`;
+  } finally {
+    return packageInfo;
+  }
 }
 function parseEnv(env: NodeJS.ProcessEnv): EnvConfig {
   const { NODE_ENV, DB_DATABASE, DB_USERNAME, DB_PASSWORD, DB_HOST, DB_DIALECT } = env;
-  const DB_PORT = parseInt(`${env.DB_PORT}`);
+  const DB_PORT = parseInt(`${env.DB_PORT || 3360}`);
   if (!NODE_ENV) {
     throw new MissingEnvError('NODE_ENV');
   }
@@ -85,6 +94,20 @@ function parseEnv(env: NodeJS.ProcessEnv): EnvConfig {
     DB_DIALECT: <DbDialect>DB_DIALECT,
     DB_PORT,
   };
+}
+
+interface PackageInfo {
+  name: string;
+  version: string;
+}
+interface EnvConfig {
+  NODE_ENV: NodeEnv;
+  DB_DATABASE: string;
+  DB_USERNAME: string;
+  DB_PASSWORD: string;
+  DB_HOST: string;
+  DB_PORT: number;
+  DB_DIALECT: DbDialect;
 }
 
 class MissingEnvError extends Error {
