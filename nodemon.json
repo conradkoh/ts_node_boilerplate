@@ -1,7 +1,5 @@
 {
-  "events": {
-    "start": "npm run generate:docs"
-  },
+  "events": {},
   "watch": ["src"],
   "ext": "ts",
   "ignore": ["src/**/*.spec.ts"],

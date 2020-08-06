@@ -2,6 +2,7 @@ import express from 'express';
 import { getConfig } from '../config/index';
 import controllers from '../controllers';
 import docsRouter from './docs';
+import userRouter from './user';
 const config = getConfig();
 const router = express.Router();
 /**
@@ -29,6 +30,8 @@ const router = express.Router();
 router.get('/', (req, res) => {
   res.json(config.apiInfo);
 });
+
+router.use('/user', userRouter);
 
 router.use('/docs', docsRouter);
 export default router;
